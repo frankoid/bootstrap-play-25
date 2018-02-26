@@ -52,13 +52,13 @@ class ControllerConfigSpec extends WordSpec with MustMatchers {
   "ControllerConfigs.fromConfig" must {
 
     val controllerConfigs = ControllerConfigs.fromConfig(Configuration(
-      "controllers.foo.needsAuditing" -> false,
-      "controllers.foo.needsLogging" -> false
+      "controllers.uk.gov.hmrc.foo.FooController.needsAuditing" -> false,
+      "controllers.uk.gov.hmrc.foo.FooController.needsLogging" -> false
     ))
 
     "return loaded configuration" in {
 
-      val config = controllerConfigs.get("foo")
+      val config = controllerConfigs.get("uk.gov.hmrc.foo.FooController")
 
       config.auditing mustBe false
       config.logging mustBe false
@@ -75,8 +75,8 @@ class ControllerConfigSpec extends WordSpec with MustMatchers {
     "not fail if there are primitive values with controllers. prefix" in {
       val controllerConfigsWithPrimitiveValues = ControllerConfigs.fromConfig(Configuration(
         "controllers.confidenceLevel" -> 300,
-        "controllers.foo.needsAuditing" -> false,
-        "controllers.foo.needsLogging" -> false
+        "controllers.uk.gov.hmrc.foo.FooController.needsAuditing" -> false,
+        "controllers.uk.gov.hmrc.foo.FooController.needsLogging" -> false
       ))
 
       val config = controllerConfigsWithPrimitiveValues.get("bar")
